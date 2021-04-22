@@ -75,6 +75,45 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         </ul>
       </section>
       <section className={styles.allEpisodes}>
+        <h2>Todos os episodios</h2>
+
+        <table cellSpacing={0}>
+          <thead>
+            <th>Podcast</th>
+            <th>Integrantes</th>
+            <th>Data</th>
+            <th>Duracao</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {allEpisodes.map(episodes => {
+              return (
+                <tr key={episodes.id}>
+                  <td>
+                    <Image 
+                      width={120}
+                      height={120}
+                      src={episodes.thumbnail}
+                      alt={episodes.title}
+                      objectFit="cover"
+                    />
+                  </td>
+                  <td>
+                    <a href="">{episodes.title}</a>
+                  </td>
+                  <td>{episodes.members}</td>
+                  <td>{episodes.publishedAt}</td>
+                  <td>{episodes.durationAsString}</td>
+                  <td>
+                    <button type="button">
+                      <img src="/play-green.svg" alt="Tocar episodio"/>
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
 
       </section>
     </div>
