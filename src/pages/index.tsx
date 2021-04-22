@@ -79,6 +79,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
         <table cellSpacing={0}>
           <thead>
+            <th></th>
             <th>Podcast</th>
             <th>Integrantes</th>
             <th>Data</th>
@@ -89,7 +90,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             {allEpisodes.map(episodes => {
               return (
                 <tr key={episodes.id}>
-                  <td>
+                  <td style={{ width:72}}>
                     <Image 
                       width={120}
                       height={120}
@@ -102,7 +103,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <a href="">{episodes.title}</a>
                   </td>
                   <td>{episodes.members}</td>
-                  <td>{episodes.publishedAt}</td>
+                  <td style={{ width:100}}>{episodes.publishedAt}</td>
                   <td>{episodes.durationAsString}</td>
                   <td>
                     <button type="button">
