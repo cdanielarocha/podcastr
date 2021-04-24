@@ -1,4 +1,5 @@
 import { createContext, useState, ReactNode } from 'react';
+import Episode from '../pages/episodes/[slug]';
 
 type Episode = {
     title: string;
@@ -13,9 +14,11 @@ type PlayerContextData = {
     currentEpisodeIndex: number;
     isPlaying: boolean;
     play: (episode: Episode) => void;
-    playList: (list: Episode[], index:number) => void;
+    playList: (list: Episode[], index: number) => void;
     setPlayingState: (state: boolean) => void;
     togglePlay: () => void;
+    playNext: () => void;
+    playPrevious: () => void;
 };
 
 export const PlayerContext = createContext({} as PlayerContextData);
@@ -24,7 +27,7 @@ type PlayerContextProviderProps = {
     children: ReactNode;
 }
 
-export function PlayerContextProvider({ children }:PlayerContextProviderProps) {
+export function PlayerContextProvider({ children }: PlayerContextProviderProps) {
 
 
     const [episodeList, setEpisodeList] = useState([]);
@@ -37,7 +40,7 @@ export function PlayerContextProvider({ children }:PlayerContextProviderProps) {
         setIsPlaying(true);
     }
 
-    function playList(list: Episode[], index:number){
+    function playList(list: Episode[], index: number) {
         setEpisodeList(list);
         setCurrentEpisodeIndex(index);
         setIsPlaying(true);
@@ -51,16 +54,31 @@ export function PlayerContextProvider({ children }:PlayerContextProviderProps) {
         setIsPlaying(state);
     }
 
+    function playNext() {
+        const nextEpisodeIndex = currentEpisodeIndex + 1;
+        if (nextEpisodeIndex < episodeList.length) {
+            setCurrentEpisodeIndex(currentEpisodeIndex + 1);
+        }
+    }
+
+    function playPrevious() {
+        if (currentEpisodeIndex > 0) {
+            setCurrentEpisodeIndex(currentEpisodeIndex - 1);
+        }
+    }
+
     return (
-        <PlayerContext.Provider 
-            value={{ 
-                episodeList, 
-                currentEpisodeIndex, 
-                play, 
+        <PlayerContext.Provider
+            value={{
+                episodeList,
+                currentEpisodeIndex,
+                play,
                 playList,
-                isPlaying, 
-                togglePlay, 
-                setPlayingState 
+                isPlaying,
+                togglePlay,
+                playPrevious,
+                playNext,
+                setPlayingState
             }}
         >
             {children}

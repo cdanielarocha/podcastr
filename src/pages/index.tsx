@@ -45,7 +45,7 @@ export default function Home() {
 //SSR
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const {playList}=useContext(PlayerContext)
+  const { playList } = useContext(PlayerContext)
 
   const episodeList = [...latestEpisodes, ...allEpisodes];
 
@@ -55,7 +55,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <h2>Ultimos lancamentos </h2>
 
         <ul>
-          {latestEpisodes.map (( episode , index) => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id}>
                 <Image
@@ -75,7 +75,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button" onClick={() => playList(episodeList,index)}>
+                <button type="button" onClick={() => playList(episodeList, index)}>
                   <img src="/play-green.svg" alt="Tocar episodio" />
                 </button>
               </li>
@@ -97,7 +97,6 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
               <th>Duracao</th>
               <th></th>
             </tr>
-
           </thead>
           <tbody>
             {allEpisodes.map((episode, index) => {
@@ -116,13 +115,12 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <Link href={`/episodes/${episode.id}`}>
                       <a>{episode.title}</a>
                     </Link>
-                    
                   </td>
                   <td>{episode.members}</td>
                   <td style={{ width: 100 }}>{episode.publishedAt}</td>
                   <td>{episode.durationAsString}</td>
                   <td>
-                    <button type="button" onClick={()=>playList(episodeList, index + latestEpisodes.length)}>
+                    <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
                       <img src="/play-green.svg" alt="Tocar episodio" />
                     </button>
                   </td>
